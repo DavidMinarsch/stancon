@@ -40,10 +40,10 @@ df <- 7
 
 data <- c("nteams","ngames","team1","score1","team2","score2","prior_score","df")
 
-fit <- stan_run("worldcup.stan", data=data, chains=4, iter=2000)
+fit <- stan_run("worldcup.stan", data=data, chains=4, iter=2)
 print(fit)
 
-fit <- stan_run("worldcup_matt.stan", data=data, chains=4, iter=100)
+fit <- stan_run("worldcup_matt.stan", data=data, chains=4, iter=2)
 print(fit)
 
 colVars <- function(a) {n <- dim(a)[[1]]; c <- dim(a)[[2]]; return(.colMeans(((a - matrix(.colMeans(a, n, c), nrow = n, ncol = c, byrow = TRUE)) ^ 2), n, c) * n / (n - 1))}
@@ -57,9 +57,9 @@ png ("worldcup1.png", height=500, width=500)
 coefplot (rev(a_hat), rev(a_se), CI=1, varnames=rev(teams), main="Team quality (estimate +/- 1 s.e.)\n", cex.var=.9, mar=c(0,4,5.1,2), xlim=c(-.5,.5))
 dev.off()
 
-fit_noprior <- stan_run("worldcup_noprior_matt.stan", data=data, chains=4, iter=100)
+fit_noprior <- stan_run("worldcup_noprior_matt.stan", data=data, chains=4, iter=2)
 print(fit_noprior)
-fit_noprior <- stan_run("worldcup_noprior_matt.stan", data=data, chains=4, iter=1000)
+fit_noprior <- stan_run("worldcup_noprior_matt.stan", data=data, chains=4, iter=2)
 print(fit_noprior)
 
 worldcup_plot <- function (fit, file.png){
@@ -93,7 +93,7 @@ coefplot (rev(score1 - score2), sds=rep(0, ngames),
           mar=c(0,7,6,2))
 dev.off ()
 
-fit <- stan_run("worldcup_matt.stan", data=data, chains=4, iter=5000)
+fit <- stan_run("worldcup_matt.stan", data=data, chains=4, iter=5)
 print(fit)
 
 sims <- extract (fit)
