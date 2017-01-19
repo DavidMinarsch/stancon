@@ -1,0 +1,2 @@
+# stancon
+Exercises from StanCon
